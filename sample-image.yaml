@@ -42,7 +42,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: azhar.v4.mdp.dartssolutions.ca
+  - host: test.sherdilitacademy.net
     http:
       paths:
       - path: /
