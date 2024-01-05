@@ -42,7 +42,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: test.sherdilitacademy.net
+  - host: test-1.sherdilitacademy.net
     http:
       paths:
       - path: /
