@@ -66,5 +66,13 @@ Deletion Process:
 4) Thend delete svc via "kubectl delete svc hello-k8s-app-service node-todo-app-svc"
 5) Then delete deployment via "kubectl delete deployment node-todo-app hello-k8s-app"
 -------------------------------------------------------------------------------------
+FOR Prometheus & Grafana:
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo update
+
+helm install prometheus prometheus-community/kube-prometheus-stack
+
+-----------------------------------------------------------------------------------------
 ALL DONE
 =======
