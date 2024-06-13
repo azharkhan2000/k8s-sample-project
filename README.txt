@@ -1,3 +1,5 @@
+Integrating AWS Secrets Manager with Kuberenetes
+
 1st Step:
 Create Secrets Manager either via Console or CLI:
 aws --region "us-east-1" secretsmanager \
