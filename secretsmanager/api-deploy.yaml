@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-k8s-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-k8s-app
+  template:
+    metadata:
+      labels:
+        app: hello-k8s-app
+    spec:
+      serviceAccountName: azhar-secrets-sa
+      volumes:
+        - name: azhar-app-secrets
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: azhar-secrets
+      containers:
+      - name: hello-k8s-app
+        image: nginx:alpine
+        volumeMounts:
+          - name: azhar-app-secrets
+            mountPath: "/mnt/secrets"
+            readOnly: true
+        ports:
+        - containerPort: 80
+        resources:
+            requests:
+              cpu: "500m"
+              memory: "250Mi"
+            limits:
+              cpu: "800m"
+              memory: "512Mi"
