@@ -1,7 +1,8 @@
-#first run these two lines
-
+#To Deploy Dashboard
 #export DASHBOARD_VERSION="v2.6.0"
 #kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/${DASHBOARD_VERSION}/aio/deploy/recommended.yaml
+#To get token
+#aws eks get-token --cluster-name azhar-eks | jq -r '.status.token'
 
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -9,8 +10,9 @@ metadata:
   name: dashboard-k8-ingress
   namespace: kubernetes-dashboard
   annotations:
-    kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "nginx" # Ensure NGINX Ingress is used
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS" # Use HTTPS for the backend
+    nginx.ingress.kubernetes.io/rewrite-target: / # Optional, depending on your setup
 spec:
   rules:
   - host: dashboard.sherdilitacademy.net
@@ -20,6 +22,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: dashboard-metrics-scraper
+            name: kubernetes-dashboard
             port:
-              number: 80
+              number: 443
