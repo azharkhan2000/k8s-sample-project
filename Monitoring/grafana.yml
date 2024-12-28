@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: grafana.sherdilitacademy.net
+  - host: grafana.rawcaster.com
     http:
       paths:
       - path: /
@@ -28,7 +28,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: prometheus.sherdilitacademy.net
+  - host: prometheus.rawcaster.com
     http:
       paths:
       - path: /

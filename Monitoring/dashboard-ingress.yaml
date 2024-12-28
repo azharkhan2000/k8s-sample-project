@@ -1,0 +1,25 @@
+#first run these two lines
+
+#export DASHBOARD_VERSION="v2.6.0"
+#kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/${DASHBOARD_VERSION}/aio/deploy/recommended.yaml
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dashboard-k8-ingress
+  namespace: kubernetes-dashboard
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: dashboard.sherdilitacademy.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: dashboard-metrics-scraper
+            port:
+              number: 80
