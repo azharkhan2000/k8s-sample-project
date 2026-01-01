@@ -9,7 +9,7 @@ metadata:
   name: node-todo-app
   namespace: test
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: node-todo-app

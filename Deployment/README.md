@@ -1,6 +1,8 @@
 # sherdil-k8s-sample
 This is sample project for k8s for practice for students or New Fellows in DevOps.
 
+aws eks create-access-entry --cluster-name Azhar-EKS --principal-arn arn:aws:iam::678878256416:user/K.Electric-User --type STANDARD --username K.Electric-User
+
 Purpose of This Project:
 To Deploy 2 different applications on Kubernetes with different SSL practice.
 Lets Encrypt or AWS ACM along with AWS Load Balancer.
