@@ -1,0 +1,128 @@
+KUBERNETES & AWS EKS COMMAND CHEAT SHEET
+=====================================
+
+
+AWS EKS – CONNECT TO CLUSTER
+----------------------------
+aws eks --region ca-central-1 update-kubeconfig --name mdp-prod-cluster --profile mdp-prod
+aws eks --region us-east-1 update-kubeconfig --name rawcaster-eks
+
+NAMESPACE OPERATIONS
+--------------------
+kubectl get ns
+kubectl create ns <namespace>
+kubectl delete ns <namespace>
+kubectl describe ns <namespace>
+
+
+DEPLOYMENT OPERATIONS
+---------------------
+kubectl apply -f <file-name>.yaml -n <namespace>
+kubectl get deployments -n <namespace>
+kubectl describe deployment <deployment-name> -n <namespace>
+kubectl delete deployment <deployment-name> -n <namespace>
+
+Restart Deployment:
+kubectl rollout restart deployment <deployment-name> -n <namespace>
+
+Check Rollout Status:
+kubectl rollout status deployment <deployment-name> -n <namespace>
+
+
+POD OPERATIONS
+--------------
+kubectl get pods -n <namespace>
+kubectl describe pod <pod-name> -n <namespace>
+kubectl delete pod <pod-name> -n <namespace>
+
+Delete all pods in namespace:
+kubectl delete pods --all -n <namespace>
+
+Delete all pods in all namespaces:
+kubectl delete pods --all --all-namespaces
+
+
+LOGS & DEBUGGING
+----------------
+kubectl logs <pod-name> -n <namespace>
+kubectl logs -f <pod-name> -n <namespace>
+kubectl logs <pod-name> -c <container-name> -n <namespace>
+kubectl logs <pod-name> --previous -n <namespace>
+
+
+EXEC INTO POD
+-------------
+kubectl exec -it <pod-name> -n <namespace> -- bash
+kubectl exec -it <pod-name> -n <namespace> -- sh
+kubectl exec -it <pod-name> -c <container-name> -n <namespace> -- bash
+
+
+SERVICES & NETWORKING
+---------------------
+kubectl get svc -n <namespace>
+kubectl describe svc <service-name> -n <namespace>
+kubectl get endpoints -n <namespace>
+
+Port Forward:
+kubectl port-forward svc/<service-name> 8080:80 -n <namespace>
+
+
+HPA (AUTOSCALING)
+-----------------
+kubectl get hpa -n <namespace>
+kubectl describe hpa <hpa-name> -n <namespace>
+
+
+NODES & CLUSTER INFO
+--------------------
+kubectl get nodes
+kubectl describe node <node-name>
+kubectl cluster-info
+
+Resource Usage (metrics-server required):
+kubectl top nodes
+kubectl top pods -n <namespace>
+
+
+CONFIGMAPS & SECRETS
+--------------------
+kubectl get configmap -n <namespace>
+kubectl get secret -n <namespace>
+kubectl describe secret <secret-name> -n <namespace>
+
+Decode Secret:
+kubectl get secret <secret-name> -n <namespace> -o jsonpath="{.data.key}" | base64 --decode
+
+
+YAML EXPORT / BACKUP
+--------------------
+kubectl get deployment <deployment-name> -n <namespace> -o yaml > deployment.yaml
+kubectl get pod <pod-name> -n <namespace> -o yaml > pod.yaml
+
+
+KUBECONFIG & CONTEXT
+--------------------
+cat ~/.kube/config
+kubectl config get-contexts
+kubectl config use-context <context-name>
+kubectl config current-context
+
+AWS STS – ASSUME ROLE
+---------------------
+aws sts assume-role --role-arn arn:aws:iam::157881489277:role/Darts-Dev-role --role-session-name Darts-prod
+
+Decode Authorization Message:
+aws sts decode-authorization-message --encoded-message <encoded-string>
+
+
+SYSTEM & NETWORKING
+-------------------
+netstat -lpnt
+ss -lntp
+
+
+USEFUL ONE-LINERS
+----------------
+kubectl get all -n <namespace>
+kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
+kubectl get pods -n <namespace> -w
