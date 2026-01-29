@@ -1,11 +1,10 @@
 KUBERNETES & AWS EKS COMMAND CHEAT SHEET
 =====================================
 
-
 AWS EKS – CONNECT TO CLUSTER
 ----------------------------
 aws eks --region ca-central-1 update-kubeconfig --name mdp-prod-cluster --profile mdp-prod
-aws eks --region us-east-1 update-kubeconfig --name rawcaster-eks
+aws eks --region us-east-1 update-kubeconfig --name Azhar-EKS
 
 NAMESPACE OPERATIONS
 --------------------
