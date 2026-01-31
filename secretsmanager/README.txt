@@ -48,7 +48,7 @@ IAM_POLICY_ARN_SECRET=$(aws --region "us-east-1" iam \
     "Statement": [ {
         "Effect": "Allow",
         "Action": ["secretsmanager:GetSecretValue", "secretsmanager:DescribeSecret"],
-        "Resource": ["'"arn:aws:secretsmanager:us-east-1:678878256416:secret:azhar-secret-IkQlYi"'" ]
+        "Resource": ["'"arn:aws:secretsmanager:us-east-1:678878256416:secret:azhar-secret-dCn0EN"'" ]
     } ]
 }')
 
@@ -77,7 +77,7 @@ kubectl get secretproviderclass
 10th Step:
 Check secrets
 Deploy Sample app and go inside that pod and call secrets from that pod.
-kubectl apply -f .\secretsmanager\api-deploy.yaml
+kubectl apply -f secretsmanager/api-deploy.yaml 
 
 kubectl get pod
 

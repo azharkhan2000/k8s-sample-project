@@ -11,6 +11,7 @@ metadata:
 data:
   APP_ENV: "dev"
   APP_DEBUG: "true"
+  APP_PASSWORD: "sherdilitacademy"
 ---
 # deployment.yaml
 apiVersion: apps/v1
