@@ -3,7 +3,7 @@ name: AWS EKS Deployment
 on:
   push:
     branches:
-      - main #Add your branch
+      - test #Add your branch
 env:
   AWS_REGION: us-east-1
   EKS_CLUSTER_NAME: Azhar-EKS #Add your Cluster Name
