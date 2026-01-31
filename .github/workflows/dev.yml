@@ -32,7 +32,7 @@ jobs:
 
       - name: Update kubeconfig
         env:
-          EKS_CLUSTER_ROLE_ARN: arn:aws:iam::678878256416:user/azhar-jenkins #user arn
+          EKS_CLUSTER_ROLE_ARN: arn:aws:iam::678878256416:role/Azhar-EKS-WN #user arn
         run: |
           aws eks update-kubeconfig --name Azhar-EKS --region us-east-1 --role-arn $EKS_CLUSTER_ROLE_ARN
           kubectl get ns
