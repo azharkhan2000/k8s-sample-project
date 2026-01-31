@@ -54,4 +54,4 @@ jobs:
 
       - name: Deploy to EKS
         run: |
-          kubectl apply -f Deployment\sample-image.yaml
+          kubectl rollout restart deployment hello-k8s-app -n test
