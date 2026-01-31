@@ -1,0 +1,82 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-autoscaler
+  labels:
+    k8s-addon: cluster-autoscaler.addons.k8s.io
+    k8s-app: cluster-autoscaler
+rules:
+  # Events & endpoints
+  - apiGroups: [""]
+    resources: ["events", "endpoints"]
+    verbs: ["create", "patch"]
+
+  # Pod eviction
+  - apiGroups: [""]
+    resources: ["pods/eviction"]
+    verbs: ["create"]
+
+  # Pod status
+  - apiGroups: [""]
+    resources: ["pods/status"]
+    verbs: ["update"]
+
+  # Leader election endpoint
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    resourceNames: ["cluster-autoscaler"]
+    verbs: ["get", "update"]
+
+  # Nodes
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["watch", "list", "get", "update"]
+
+  # Core workload resources
+  - apiGroups: [""]
+    resources:
+      - namespaces
+      - pods
+      - services
+      - replicationcontrollers
+      - persistentvolumeclaims
+      - persistentvolumes
+    verbs: ["watch", "list", "get"]
+
+  # Apps workloads
+  - apiGroups: ["apps"]
+    resources:
+      - statefulsets
+      - replicasets
+      - daemonsets
+    verbs: ["watch", "list", "get"]
+
+  # PodDisruptionBudgets
+  - apiGroups: ["policy"]
+    resources: ["poddisruptionbudgets"]
+    verbs: ["watch", "list"]
+
+  # 🔴 STORAGE (FIXED FOR K8s 1.27+ / 1.34)
+  - apiGroups: ["storage.k8s.io"]
+    resources:
+      - storageclasses
+      - csinodes
+      - csidrivers
+      - csistoragecapacities
+      - volumeattachments
+    verbs: ["watch", "list", "get"]
+
+  # Jobs
+  - apiGroups: ["batch"]
+    resources: ["jobs"]
+    verbs: ["get", "list", "watch", "patch"]
+
+  # Leader election leases
+  - apiGroups: ["coordination.k8s.io"]
+    resources: ["leases"]
+    verbs: ["create"]
+
+  - apiGroups: ["coordination.k8s.io"]
+    resources: ["leases"]
+    resourceNames: ["cluster-autoscaler"]
+    verbs: ["get", "update"]

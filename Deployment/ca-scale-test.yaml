@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ca-scale-test
+spec:
+  containers:
+  - name: stress
+    image: busybox
+    command: ["sh", "-c", "sleep 3600"]
+    resources:
+      requests:
+        cpu: "1000m"     # 1 vCPU
+        memory: "1Gi"    # 1 GB

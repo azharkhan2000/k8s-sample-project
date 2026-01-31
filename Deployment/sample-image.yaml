@@ -3,6 +3,15 @@ kind: Namespace
 metadata:
   name: test
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: test
+data:
+  APP_ENV: "dev"
+  APP_DEBUG: "true"
+---
 # deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -24,6 +33,9 @@ spec:
         image: nginx:alpine
         ports:
         - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: app-config
 ---
 # service.yaml
 apiVersion: v1

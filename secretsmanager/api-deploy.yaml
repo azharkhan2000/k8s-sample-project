@@ -19,7 +19,7 @@ spec:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
-              secretProviderClass: azhar-secrets
+              secretProviderClass: db-credentials
       containers:
       - name: hello-k8s-app
         image: nginx:alpine
